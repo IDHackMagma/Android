@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">IDHack16-MLL-Infrastructure</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_splash">Splash</string>
+    <string name="title_activity_map_view">Map</string>
+    <string name="splash_button">Let\'s go!</string>
+    <string name="form_after_button">Report Again</string>
+    <string name="form_after_text">Thanks for the report!</string>
+    <string name="title">MagmaApp</string>
+    <string name="title_activity_report_success_page">ReportSuccessPage</string>
 </resources>

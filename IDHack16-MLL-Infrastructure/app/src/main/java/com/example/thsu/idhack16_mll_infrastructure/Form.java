@@ -1,5 +1,6 @@
 package com.example.thsu.idhack16_mll_infrastructure;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+
 
 public class Form extends AppCompatActivity {
 
@@ -17,15 +21,6 @@ public class Form extends AppCompatActivity {
         setContentView(R.layout.activity_form);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override
@@ -48,5 +43,11 @@ public class Form extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public void submitButton(View view) {
+        //EditText ed = (EditText) findViewById(R.id.editTextDescription);
+        //RequestQueue queue = Volley.newRequestQueue(this);
+        Intent intent = new Intent(this, FormAfter.class);
+        startActivity(intent);
     }
 }
