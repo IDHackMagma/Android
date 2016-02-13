@@ -40,9 +40,18 @@
         android:layout_height="wrap_content"
         android:text="submit"
         android:id="@+id/submitButton"
+        android:onClick="submitButton"
         android:layout_below="@+id/editTextDescription"
-        android:layout_alignRight="@+id/editTextDescription"
-        android:layout_alignEnd="@+id/editTextDescription"
-        android:onClick="submitButton" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/textFieldTarget"
+        android:layout_below="@+id/submitButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
