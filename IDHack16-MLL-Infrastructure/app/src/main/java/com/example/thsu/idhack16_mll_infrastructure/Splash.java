@@ -22,7 +22,7 @@ public class Splash extends AppCompatActivity {
 
     // This button function will link to the form, starts the app.
     public void submitButton(View view) {
-        Intent intent = new Intent(this, Form.class);
+        Intent intent = new Intent(this, list.class);
         startActivity(intent);
     }
 

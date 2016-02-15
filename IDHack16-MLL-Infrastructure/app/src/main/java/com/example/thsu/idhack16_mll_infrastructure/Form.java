@@ -1,8 +1,11 @@
 package com.example.thsu.idhack16_mll_infrastructure;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -19,89 +22,44 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
-import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-import com.google.android.gms.location.LocationServices;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class Form extends AppCompatActivity implements ConnectionCallbacks, OnConnectionFailedListener {
+public class Form extends AppCompatActivity{
 
-    GoogleApiClient mGoogleApiClient;
-    Location mLastLocation;
-    String mLongitudeText;
-    String mLatitudeText;
+    LocationManager locMgr;
+    String mLat;
+    String mLong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (mGoogleApiClient == null) {
-            GoogleApiClient mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
-        }
-        System.out.printf("%d", mGoogleApiClient == null ? 1 : 0);
+        locMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        LocationListener locationListener = new LocationListener() {
+            public void onLocationChanged(Location location) {
+                // Called when a new location is found by the network location provider.
+                mLat = "" + location.getLatitude();
+                mLong = "" + location.getLongitude() ;
+            }
+
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+            public void onProviderEnabled(String provider) {}
+
+            public void onProviderDisabled(String provider) {}
+        };
+
+
+        locMgr.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 
         setContentView(R.layout.activity_form);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-    }
-
-    @Override
-    public void onConnected(Bundle connectionHint) {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
-        if (mLastLocation != null) {
-            mLatitudeText = String.valueOf(mLastLocation.getLatitude());
-            mLongitudeText = String.valueOf(mLastLocation.getLongitude());
-        }
-    }
-
-    @Override
-    protected void onStart() {
-        //mGoogleApiClient.connect();
-        super.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        //mGoogleApiClient.disconnect();
-        super.onStop();
-    }
-
-
-    @Override
-    public void onConnectionSuspended(int cause) {
-        // The connection has been interrupted.
-        // Disable any UI components that depend on Google APIs
-        // until onConnected() is called.
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult result) {
-        // This callback is important for handling errors that
-        // may occur while attempting to connect with Google.
-        //
-        // More about this in the 'Handle Connection Failures' section.
     }
 
     @Override
@@ -133,18 +91,19 @@ public class Form extends AppCompatActivity implements ConnectionCallbacks, OnCo
         final TextView tv = (TextView) findViewById(R.id.textFieldTarget);
         tv.setText("");
 
-        // Instantiate the RequestQueue.
 
-        // Create an instance of GoogleAPIClient.
+
+
+        // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         String url ="https://id-hack-magma-server.herokuapp.com/api/magma";
         // Request a string response from the provided URL
-        JSONObject myReq = new JSONObject();
+        final JSONObject myReq = new JSONObject();
         try {
             myReq.put("title", title.getText());
             myReq.put("description", description.getText());
-            myReq.put("gps_longitude", mLongitudeText);
-            myReq.put("gps_latitude", mLatitudeText);
+            myReq.put("gps_longitude", mLong);
+            myReq.put("gps_latitude", mLat);
         } catch (JSONException e) {
             System.err.println("JSON exception.");
         }
@@ -153,8 +112,8 @@ public class Form extends AppCompatActivity implements ConnectionCallbacks, OnCo
                     @Override
                     public void onResponse(JSONObject response) {
                         // Display the first 500 characters of the response string.
-                        tv.setText("Response is: "+ response.toString());
-                        startActivity(intent);
+                        //tv.setText(myReq.toString());
+                        //startActivity(intent);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -163,6 +122,6 @@ public class Form extends AppCompatActivity implements ConnectionCallbacks, OnCo
             }
         });
         queue.add(jsonRequest);
-
+        startActivity(intent);
     }
 }

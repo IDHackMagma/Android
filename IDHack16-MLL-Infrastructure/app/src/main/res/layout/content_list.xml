@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.thsu.idhack16_mll_infrastructure.list"
+    tools:showIn="@layout/activity_list">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:id="@+id/listTextView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/e1Title"
+        android:layout_below="@+id/listTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/e1Desc"
+        android:layout_below="@+id/e1Title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/denyText"
+        android:id="@+id/e1deny"
+        android:layout_below="@+id/listTextView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="e1deny"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="2"
+        android:id="@+id/e2Title"
+        android:layout_below="@+id/e1deny"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/e2Desc"
+        android:layout_below="@+id/e2Title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/denyText"
+        android:id="@+id/e2deny"
+        android:layout_alignTop="@+id/e2Title"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="e2deny"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="3"
+        android:id="@+id/e3Title"
+        android:layout_below="@+id/e2deny"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/e3Desc"
+        android:layout_below="@+id/e3Title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/denyText"
+        android:id="@+id/e3deny"
+        android:layout_below="@+id/e2deny"
+        android:layout_alignLeft="@+id/e2deny"
+        android:layout_alignStart="@+id/e2deny"
+        android:onClick="e3deny"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/confirmText"
+        android:id="@+id/e1confirm"
+        android:layout_above="@+id/e2Title"
+        android:layout_toLeftOf="@+id/e1deny"
+        android:layout_toStartOf="@+id/e1deny"
+        android:onClick="e1confirm"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/confirmText"
+        android:id="@+id/e2confirm"
+        android:layout_below="@+id/e1confirm"
+        android:layout_alignRight="@+id/e1confirm"
+        android:layout_alignEnd="@+id/e1confirm"
+        android:onClick="e2confirm"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/confirmText"
+        android:id="@+id/e3confirm"
+        android:layout_below="@+id/e2deny"
+        android:layout_toLeftOf="@+id/e2deny"
+        android:layout_toStartOf="@+id/e2deny"
+        android:onClick="e3confirm"/>
+
+    <fragment
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:id="@+id/map"
+        android:layout_below="@+id/submitButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        map:cameraTargetLat="-33.796923"
+        map:cameraTargetLng="150.922433"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Report a Problem"
+        android:id="@+id/submitButton"
+        android:onClick="submitButton"
+        android:layout_below="@+id/e3deny"
+        android:layout_alignRight="@+id/e3deny"
+        android:layout_alignEnd="@+id/e3deny"/>
+</RelativeLayout>

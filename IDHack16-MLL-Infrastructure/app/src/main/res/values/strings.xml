@@ -8,4 +8,7 @@
     <string name="form_after_text">Thanks for the report!</string>
     <string name="title">MagmaApp</string>
     <string name="title_activity_report_success_page">ReportSuccessPage</string>
+    <string name="title_activity_list">list</string>
+    <string name="confirmText">Confirm</string>
+    <string name="denyText">Deny</string>
 </resources>

@@ -59,6 +59,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.thsu.idhack16_mll_infrastructure.Form" />
         </activity>
+        <activity
+            android:name=".list"
+            android:label="@string/title_activity_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

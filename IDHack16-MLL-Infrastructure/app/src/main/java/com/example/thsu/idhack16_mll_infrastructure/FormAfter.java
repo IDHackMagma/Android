@@ -18,7 +18,7 @@ public class FormAfter extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
     public void submitButton(View view) {
-        Intent intent = new Intent(this, Form.class);
+        Intent intent = new Intent(this, list.class);
         startActivity(intent);
     }
 }
